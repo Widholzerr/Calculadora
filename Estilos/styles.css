@@ -1,0 +1,94 @@
+body {
+    background-color: #000;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'San Francisco', Arial, sans-serif;
+}
+
+.calculadora {
+    background: #222;
+    border-radius: 40px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    padding: 30px 20px;
+    width: 320px;
+}
+
+.display {
+    background: #444;
+    color: #fff;
+    border-radius: 20px;
+    font-size: 2.5rem;
+    text-align: right;
+    padding: 20px 10px;
+    margin-bottom: 20px;
+    min-height: 50px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3) inset;
+}
+
+.botoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.linha {
+    display: flex;
+    flex-direction: row;
+    gap: 12px;
+}
+
+.botao, .virgula {
+    flex: 1;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    padding: 18px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.resultado, .divisao, .multiplicacao, .subtracao, .adicao {
+    flex: 1;
+    background: #ff9500;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    padding: 18px 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.resultado:active, .divisao:active, .multiplicacao:active, .subtracao:active, .adicao:active {
+    background: #dab270;
+}
+
+.botao#ac,
+.botao#mais-menos,
+.botao#porcento {
+    background: #a5a5a5;
+    color: #222;
+}
+
+.botao#ac:active,
+.botao#mais-menos:active,
+.botao#porcento:active {
+    background: #cdcdcd;
+}
+
+.botao.zero {
+    flex: 2;
+    border-radius: 30px;
+    text-align: left;
+    padding-left: 32px;
+}
+
+.botao:active, .virgula:active {
+    background: #666;
+}
