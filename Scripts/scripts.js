@@ -16,7 +16,9 @@ let operacao = undefined;
 
 
 function atualizarDisplay() {
-    display.textContent = operacaoAtual;
+    let texto = operacaoAtual.toString();
+    texto = texto.length > 12 ? texto.slice(0, 12) : texto;
+    display.textContent = texto === '' ? '0' : texto;
 }
 
 function limparDisplay() {
@@ -84,10 +86,10 @@ function multiplicar(num1, num2){
 
 function dividir(num1, num2){
     if (num2 === 0) {
-        alert("Divisão por zero não é permitida.");
+        display.textContent = 'Divisão por zero.';
         return;
     }
-    return parseFloat(num1) / parseFloat(num2);
+    return (parseFloat(num1) / parseFloat(num2)).toFixed(2);
 }
 
 buttons.forEach(button => {
@@ -140,7 +142,7 @@ document.getElementById('mais-menos').addEventListener('click', () => {
 document.getElementById('porcento').addEventListener('click', () => {
     if (operacaoAtual !== '') {
         let valor = parseFloat(operacaoAtual.replace(',', '.'));
-        valor = valor / 100;
+        valor = (valor / 100).toFixed(2);
         operacaoAtual = valor.toString().replace('.', ',');
         atualizarDisplay();
     }
