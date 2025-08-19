@@ -15,6 +15,7 @@ let operacaoAnterior = '';
 let operacao = undefined;
 
 
+//Atualiza o display com o valor da operação, ou limpando, etc. também tem a limitação de caracteres
 function atualizarDisplay() {
     let texto = operacaoAtual.toString();
     texto = texto.length > 12 ? texto.slice(0, 12) : texto;
@@ -49,23 +50,28 @@ function calcular() {
     const current = parseFloat(operacaoAtual.replace(',', '.'));
 
     if (isNaN(prev) || isNaN(current)) return;
+    //proteção contra operações seguidas sem número
+    if( operacaoAtual === '' || operacao === undefined)
+        return;
+    if(operacaoAnterior!==''){
 
-    switch (operacao) {
-        case '+':
-            resultado = adicao(prev, current);
-            break;
-        case '-':
-            resultado = subtracao(prev, current);
-            break;
-        case '×':
-            resultado = multiplicar(prev, current);
-            break;
-        case '÷':
-            resultado = dividir(prev, current);
-            break;
-        default:
-            return;
-    }
+        switch (operacao) {
+            case '+':
+                resultado = adicao(prev, current);
+                break;
+            case '-':
+                resultado = subtracao(prev, current);
+                break;
+            case '×':
+                resultado = multiplicar(prev, current);
+                break;
+            case '÷':
+                resultado = dividir(prev, current);
+                break;
+            default:
+                return;
+        }
+    } 
     operacaoAtual = resultado.toString().replace('.', ',');
     operacao = undefined;
     operacaoAnterior = '';
@@ -115,6 +121,7 @@ resultado.forEach(res=> {
 });
 });
 
+//verifica se há virgula, se não tiver, adiciona, caso não tenha número, começa com 0,....
 virgula.forEach(v => {
     v.addEventListener('click', () => {
         if(!operacaoAtual.includes(',')) {
@@ -128,6 +135,7 @@ virgula.forEach(v => {
     });
 });
 
+//inverte o sinal de operação do numero atual
 document.getElementById('mais-menos').addEventListener('click', () => {
     if (operacaoAtual !== '') {
         if (operacaoAtual.startsWith('-')) {
@@ -139,6 +147,7 @@ document.getElementById('mais-menos').addEventListener('click', () => {
     }
 });
 
+//aplica porcentagem no número atual
 document.getElementById('porcento').addEventListener('click', () => {
     if (operacaoAtual !== '') {
         let valor = parseFloat(operacaoAtual.replace(',', '.'));
