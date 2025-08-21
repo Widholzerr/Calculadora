@@ -10,6 +10,8 @@ const virgula = document.querySelectorAll('.virgula');
 
 const clear = document.querySelectorAll('.limpar');
 
+const acButton = document.getElementById('ac');
+
 let operacaoAtual = '';
 let operacaoAnterior = '';
 let operacao = undefined;
@@ -20,6 +22,7 @@ function atualizarDisplay() {
     let texto = operacaoAtual.toString();
     texto = texto.length > 12 ? texto.slice(0, 12) : texto;
     display.textContent = texto === '' ? '0' : texto;
+    estadoAC();
 }
 
 function limparDisplay() {
@@ -98,6 +101,10 @@ function dividir(num1, num2){
     return (parseFloat(num1) / parseFloat(num2)).toFixed(2);
 }
 
+function estadoAC(){
+    operacaoAtual === '' || operacaoAtual === '0' ? acButton.textContent = 'AC' : acButton.textContent = 'C';
+}
+
 buttons.forEach(button => {
     const valor = button.innerText;
     if (!isNaN(valor)){
@@ -157,7 +164,12 @@ document.getElementById('porcento').addEventListener('click', () => {
     }
 });
 
-document.getElementById('ac').addEventListener('click', () => {
-    limparDisplay();
+acButton.addEventListener('click', () => {
+    if (acButton.textContent === 'AC') {
+        limparDisplay();
+    } else {
+        operacaoAtual = operacaoAtual.slice(0, -1);
+        atualizarDisplay(); 
+    }
 });
 
